@@ -470,6 +470,85 @@ Se les presentan problemas para que puedan practicar, de nivel Easy & Medium, re
     <div class="topic">
         Arrays Estáticos o Vectores
     </div>
+    <p class="citas" style="margin: 10px 15px 10px 15px;">Los vectores son una forma de almacenar datos que permiten contener una serie de valores del mismo tipo, cada uno de los valores contenidos tiene una posición asociada que se usará para accederlos. Está posición o índice será siempre un número entero no negativo.</p>
+    <p>Su declaración vendría a ser así:</p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+int main(){
+    
+    /*tipo de dato*/ /*nombre*/[/*cantidad de elementos*/]={/*Elementos separados por comas*/};
+
+    return 0;
+}
+</code></pre>
+<p>
+    Para poder acceder a sus datos primero tenemos que ver cómo es que se organizan los datos en un vector:
+    <center>
+        <img src="images/vectores.jpg" alt="Imagen referencial de un vector">
+    </center>
+</p>
+
+<h2><b><i>¿De qué forma podemos <b>introducir</b> datos a un vector?</i></b></h2>
+    <p>Bueno, existen dos formas:</p>
+    <div>
+        <p>Introducir los datos en la declaración:</p>
+        <pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+int main(){
+    
+    int v[3]={1,2,3};
+            
+    return 0;
+}</code></pre>
+    </div>
+
+    <div>
+        <p>Leer los datos con un for:</p>
+        <pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+int main(){
+    int v[3];
+    for(int i=0;i&lt;3;i++){
+        cin>>v[i];
+    }
+            
+    return 0;
+}</code></pre>    
+    </div>
+
+
+<h2><b>Y ahora, <i>¿De qué forma podemos <b>mostrar</b> los datos de un vector?</b></i></h2>
+        <p>Bueno, en este caso solo existe una forma:</p>
+        <div>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+int main(){
+    //Creación del vector
+    int n; cin>>n; //Leemos el tamaño del vector
+    int v[n];//Declaramos nuestro vector de 'n' elementos
+
+    //Leemos los datos
+    for(int i=0;i&lt;n;i++){
+        cout&lt;&lt;"Ingrese el elemento N° "&lt;&lt;i+1; cin&gt;&gt;v[i];
+    }
+
+    //Finalmente imprimimos los datos
+    cout&lt;&lt;"Nuestro vector es: ";
+    for(int i=0;i&lt;n;i++){
+        cout&lt;&lt;v[i]&lt;&lt;' ';
+    }
+    return 0;
+}</code></pre>
+    </div>
+    <p>
+        <b><i>Problemas:</i></b><br>
+        <ul>
+            <li>El usuario le digitará la cantidad de horas que trabaja su contratado y cuanto le paga por hora, se le dará la cantidad <b>n</b> de trabajadores, su tarea es calcular cuánto tendrá que dar como pago en total. Además de imprimir cuánto le corresponde a cada trabajador.</li>
+            <li>Su tarea será imprimir los <b>n</b> primeros <b><i>números de Fibonnacci</i></b><i>(Primero sin usar vectores como quién practicando).</i></li>
+            <li><a href="https://codeforces.com/contest/702/problem/A">Maximum Increase (Medium)</a></li>
+        </ul>
+        
+    </p>
 
 </div>
 
