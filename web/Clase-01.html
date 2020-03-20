@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Leonidas" />
+
+
+<title>Primera Sesión C++</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="JS/archivo.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Workshop-Cedim-2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Clases
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    
+  </ul>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Clase 01:Introducción a C++/Estructuras de control</h1>
+<h4 class="author">Loopwise</h4>
+<h4 class="date">19-03-2020</h4>
+
+</div>
+
+
+    <div class="topic">
+        ¿Qué es un lenguaje de programación?
+    </div>
+    <blockquote class="citas">
+        Un lenguaje de programación es un lenguaje formal que le proporciona a una persona, en este caso el programador, la capacidad de escribir una serie de instrucciones o secuencias de órdenes en forma de algoritmos con el fin de controlar el comportamiento físico y/o lógico de una computadora, de manera que se puedan obtener diversas clases de datos o ejecutar determinadas tareas. A todo este conjunto de órdenes escritas mediante un lenguaje de programación se le denomina programa.
+        <p style="text-align: right;"><cite><a href="https://es.wikipedia.org/wiki/Lenguaje_de_programaci%C3%B3n"> Wikipedia-Lenguaje de programación </a></cite></p>
+    </blockquote>
+    <p>En este caso el lenguaje que vamos a aprender es <b>C++</b> o también llamado <b>C plus plus/Cpp.</b><br> ¿Y por qué? Pues detallaremos algunas de sus características a continuación:<br>
+    <ul>
+        <li>Programa orientado a objetos (POO).</li>
+        <li>Lenguaje muy didáctico, con este lenguaje puedes aprender muchos otros lenguajes con gran facilidad.</li>
+        <li>Es portátil y tiene un gran número de compiladores en diferentes plataformas y sistemas operativos.</li>
+        <li>Es un lenguaje de alto nivel.</li>
+    </ul>
+    Además, adeltantándonos un poco, C++ es un lenguaje sumamente potente, en comparación a otros lenguajes como python que realiza 10⁶ operaciones en un segundo, java que realiza aproximadamente 5⁹ operaciones, y C++ nos permite realizar 10⁸ operaciones en un segundo. Esto se detalla más a fondo en <b>Programación Competitiva o Algoritmos</b> (Pero para mayor información pueden revisar este link: <b><a href="https://en.wikipedia.org/wiki/Time_complexity">Time complexity</a></b> y sí quieres volar aún más te dejo este otro <a href="https://jadi.net/wp-content/uploads/2017/07/competetive-programmers-handbook.pdf"><b>Competitive Programmer's Handbook, Antti Laaksonen: Cap 1-Cap 2</b></a> )<br></p>
+
+    <section class="padre" style="background-color: rgb(209, 209, 209);">
+    <img class="grande" src=images/1200px-ISO_C++_Logo.svg.png alt="Imagen referencial de C++">
+    <img class="grande" src="images/dev-visual-c-plus-plus-logo-icon-11.png" alt="Imagen referencial de Dev-C++">
+    </section>
+
+    <!-- Entonces, ¿Qué necesito para aprender a programar? -->
+    <div class="topic">
+        Entonces, ¿Qué necesito para aprender a programar?
+    </div>
+
+    <p>Pues solo necesitas querer hacerlo, ya que es, como dice su propio nombre, <q><b>Lenguaje</b> de programación</q>, es como aprender una lengua nueva como bien sería el inglés, solo que en este caso aprendes una lengua para comunicarte con una computadora y que esta te ayude en la resolución de problemas. <br>
+    <b>Y...¿Qué problemas podría resolver?</b><br>
+    Puedes resolver cualquier problema que sea repetitivo y predecible, osea que tenga un patrón, sea un problema básico de cálculo, que consiste únicamente en seguir una secuencia de pasos, hasta un problema de Number Theory en el que probablemente tu única tarea sea encontrar ese patrón de alguna forma rebuscada o ingeniosa. <br>
+    <h3 style="margin: auto;">Algunos ejemplos de problemas:</h3></p>
+
+
+    <a href="#" onclick="cambiar('ejemplo1'); return false;">Problema N°1 (Easy) </a>
+    <div id="ejemplo1" style="display: none; margin: auto;background-color:gray">
+        Crear un programa que te permita ingresar tus notas y ver si apruebas, en caso de que no
+        indicar cuanta nota necesitas en tu susti. <br>
+        <p><a href="https://ideone.com/dpVgSf"><b>Solución</b></a></p>
+    </div><br>
+
+    <a href="#" onclick="cambiar('ejemplo2'); return false;">Problema N°2 (Medio) </a>
+    <div id="ejemplo2" style="display: none; margin: auto; background-color:gray">
+        Amugae está en un corredor redondo muy grande. El corredor consta de dos áreas. El área interna está igualmente dividida por nn sectores, y el área externa está igualmente dividida por mm sectores. Existe un muro entre cada par de sectores de la misma área (interior o exterior), pero no hay muro entre el área interior y el área exterior. Siempre existe un muro en la posición de las 12 en punto.Los sectores del área interior se denotan como <b>(1,1), (1,2), ..., (1, n) (1,1), (1,2), ..., (1, n)</b> en el sentido de las agujas del reloj. Los sectores del área exterior se denotan como <b>(2,1), (2,2), ..., (2, m) (2,1), (2,2), ..., (2, m)</b> de la misma manera. Para una comprensión clara, vea la imagen de ejemplo. <br>
+        <center>
+        <img src="images/6072b0bf04570fd72bf039db029596e05fd992a6.png" alt="Ejemplo de referencia"><br>
+        </center>
+        La respuesta es <b>"SI</b> en caso de que se pueda mover de <b>(Sx,SY)</b> a <b>(ex,ey)</b>, en otro caso imprima <b>"NO"</b>. <br>
+        <p><a href="https://codeforces.com/contest/1200/submission/70597778"><b>Solución</b></a></p>
+    </div><br>
+
+
+    <a href="#" onclick="cambiar('ejemplo3'); return false;">Problema N°3 (Hard) </a>
+    <div  id="ejemplo3" style="display: none; margin: auto; background-color:gray">
+        Se le da un número entero positivo n. Debe crear una secuencia tan estrictamente creciente de k números positivos a1, a2, ..., ak, que su suma sea igual a <b>n</b> y el máximo divisor común sea máximo. El máximo común divisor de secuencia es el máximo de tales números que cada elemento de secuencia es divisible por ellos. Si no hay una secuencia posible, entonces salida -1. <br>
+        <p><a href="https://codeforces.com/contest/803/submission/72006167"><b>Solución</b></a></p>
+    </div>
+
+    <p>
+        Entonces con esta pequeña introducción estamos listos para crear nuestro primer programa en C++.
+    </p>
+
+
+    <!-- Nuestro primer programa en C++:Hola Mundo -->
+
+    <div class="topic">
+        Nuestro primer programa en C++: <i>Hola Mundo</i>
+    </div>
+
+
+<pre class="cpp"><code>#include &lt;iostream&gt;
+
+int main(){
+    std::cout&lt;&lt;"Hola Cedim";
+    return 0;
+}
+</code></pre>
+
+<p>
+    Ahora vamos a explicar qué quiere decir cada parte: <br>
+    El <b><i>#include </i></b> quiere decir que vamos a incluir nuestra libería llamada <b><i>&lt;iostream&gt;</i></b> que es la librería que vamos a utilizar para empezar en C++. <br>
+    Después viene nuestra función principal que será <b>int main()</b> y dentro de ella estará nuestro objeto <b><i>cout</i></b> que nos servirá para imprimir un dato en pantalla <b>(cout:Console Output)</b>.
+</p>
+<p>
+    ¿Ahora qué pasa si queremos imprimir un <i>"Adiós mundo"</i>? Vamos a verlo en código:
+</p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+
+int main(){
+    std::cout&lt;&lt;"Hola cedim";
+    std::cout&lt;&lt;"Adios cedim";
+}
+</code></pre>
+<p>
+    Podemos ver que sí lo ejecutamos nos quedaría algo así:
+    <p class="codigo"> Hola cedimAdios cedim </p>
+</p>
+<p>
+    Y esto es porque no le hemos indicado a la computadora que tiene que darnos un salto de línea, en este caso tendríamos que indicarle con un <i>\n</i>, veámoslo:
+</p>
+
+<pre class="cpp"><code>#include &lt;iostream&gt;
+
+int main(){
+    std::cout&lt;&lt;"Hola cedim\n";
+    std::cout&lt;&lt;"Adios cedim";
+    return 0;
+}
+</code></pre>
+<p>
+    Y la salida sería algo así:
+</p>
+<p class="codigo">Hola cedim <br>
+Adios cedim
+</p>
+
+<p>
+    Y ya para finalizar esto se podría realizar en una sola línea, poniendo todo en una misma " ", o separando mediante el "operador" <i>&lt;&lt;</i>, veámoslo:
+</p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+
+int main(){
+    std::cout&lt;&lt;"Hola cedim\nAdios cedim\n";
+    std::cout&lt;&lt;"Hola cedim\n"&lt;&lt;"Adios cedim";
+    return 0;
+}
+</code></pre>
+<p>
+    Cuya salida sería:
+</p>
+<p class="codigo">Hola cedim <br>
+Adios cedim <br>
+Hola cedim <br>
+Adios cedim
+</p>
+<p>
+    Pero es demasiado molestoso el tener que poner <i>std::</i> a cada rato si queremos usar nuestro tan apreciado <i>cout</i>, <b>¿Verdad?</b> Por suerte los desarrolladores pensaron en eso y nos dieron la poderosa <i>using namespace std;</i> que nos servirá para llamar a los objetos de la std sin la necesidad de tener que poner ese molesto <i>std::</i> como ya se había mencionado, además de darnos una nueva herramienta para dar un salto de línea: El <b><i>endl</i></b>; veamos como se vería el código usando <b><i>endl</i></b> y <b><i>using namespace std;</i></b> :
+</p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+int main(){
+    cout&lt;&lt;"Hola cedim"&lt;&lt;endl&lt;&lt;"Adios cedim";
+    return 0;
+}
+</code></pre>
+<p class="codigo">
+    Hola cedim <br> Adios cedim
+</p>
+<br>
+<div class="topic">
+    Tipos de datos en C++
+</div>
+<center>
+<img src="images/ba6498_fcef6d52093c485887802a3da44c8331.webp" alt="Tipos de datos">
+</center>
+
+<p>
+    Se explicará un poco mejor en pizarra hasta que valor llega cada tipo de dato. <br>
+    A su vez explicaremos mejor el char y como se usa el código ASCII: 
+    <a href="https://elcodigoascii.com.ar/"><b>CÓDIGO ASCII</b></a>
+</p>
+
+<div class="topic">
+    Manejo de Bits
+</div>
+<p>Los lenguajes de programación manejan operaciones (en general mas rápidas) para manipular los bits de los números enteros, entre ellas estan:</p>
+<ul>
+<li>Desplazamiento de bits y negación: Permite usar un número entero y desplazar sus bits hacia la derecha o izquierda una cantidad de pasos o tomar los bits de un número e invertirlos.</li>
+<li>Operaciones BITWISE: Operaciones logicas <strong>AND</strong>, <strong>OR</strong> y <strong>XOR</strong>.</li>
+</ul>
+<h4><b>Desplazamiento de bits y negación</b></h4>
+<p>El desplazamiento de bits se puede ver más como una multiplicación o división por una potencia de 2, su implementación es la siguiente</p>
+<pre class="cpp"><code>int x = 10; //    000000000000000000000000000001010 Representacion de todos sus 32 bits
+x = (x << 10); // 000000000000000000010100000000000 Desplazamiento de bits hacia la izquierda
+int y = 20; //    000000000000000000000000000010100 Representacion de todos sus 32 bits
+y = (y >> 10); // 000000000000000000000000000000000 Desplazamiento de bits hacia la derecha
+</code></pre>
+<p>Además, se pueden invertir los bits de un número entero usando lo siguiente:</p>
+<pre class="cpp"><code>int x = 1000; // 000000000000000000000001111101000 Representacion de todos sus 32 bits
+x = ~x; //       111111111111111111111110000010111 Se invierten los bits del número
+</code></pre>
+
+<h3><b>Operaciones BITWISE</b></h3>
+<h4><b>BITWISE AND</b></h4>
+<p>Esta operación toma dos argumentos <i>a</i> y <i>b</i> para realizar en cada par de bits en la misma posición la función lógica <b>Y</b>:</p>
+<p>Su implementación es:</p>
+<pre class="cpp"><code>int x = 3;  // 011 Representación binaria
+int y = 4;  // 100 Representación binaria
+int z = x & y // 000 Resultado de BITWISE AND
+</code></pre>
+<h4><b>BITWISE OW</b></h4>
+<p>Esta operación toma dos argumentos <i>a</i> y <i>b</i> para realizar en cada par de bits en la misma posición la función lógica <b>O</b>:</p>
+<p>Su implementación es:</p>
+<pre class="cpp"><code>int x = 7;  // 111 Representación binaria
+int y = 4;  // 100 Representación binaria
+int z = x | y // 111 Resultado de BITWISE AND
+</code></pre>
+<h4><b>BITWISE XOR</b></h4>
+<p>Esta operación toma dos argumentos <i>a</i> y <i>b</i> para realizar en cada par de bits en la misma posición la función lógica <b>O EXCLUSIVO</b>:</p>
+<p>Su implementación es:</p>
+<pre class="cpp"><code>int x = 10;  // 1010 Representación binaria
+int y = 4;  // 0100 Representación binaria
+int z = x ^ y // 1110 Resultado de BITWISE AND
+</code></pre>
+
+<div class="topic">
+    Operadores aritméticos
+</div>
+    <img src="images/Operadores_I.png" alt="Operadores I"> 
+    <p> </p>
+    <center>
+    <img src="images/Operadores_II.gif" alt="Operadores II">
+    </center>
+    <p> </p>
+<div class="topic">
+    Entrada y Salida de datos
+</div>
+<p>
+    Lo que es la salida de datos ya lo vimos con el <i><b>cout&lt;&lt;</b></i> ahora nos falta ver una parte importante, que veremos en un pequeño problema usando un poco lo que ya hemos visto:
+</p>
+<p class="citas" style="margin: 0px 15px 0px 15px;"> 
+    Queremos que un usuario nos digite dos números y en pantalla nos imprima todas las operaciones que se puedan realizar con estos dos números, hablando de operaciones aritméticas:
+</p>
+<p>
+    Veamos, el problema nos pide que de alguna forma el usuario nos digite dos números, y... ¿Cómo hacemos ello?. Pues de nuevo, la poderosa std nos da la respuesta: <i><b>cin&gt;&gt;</b></i> es un objeto que nos permite la lectura de datos, veámoslo en código resolviendo este problema:
+</p>
+<h3><b>Código</b></h3>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+int main(){
+    int a,b;
+    cout&lt;&lt;"Ingrese dos valores:";
+    cin&gt;&gt;a;
+    cin&gt;&gt;b;
+    cout&lt;&lt;"La suma es: "&lt;&lt;a+b&lt;&lt;endl;
+    cout&lt;&lt;"La resta es: "&lt;&lt;a-b&lt;&lt;endl;
+    cout&lt;&lt;"La multiplicación es: "&lt;&lt;a*b&lt;&lt;endl;
+    cout&lt;&lt;"La division es: "&lt;&lt;a/b&lt;&lt;endl;
+    cout&lt;&lt;"El resto es: "&lt;&lt;a%b&lt;&lt;endl;
+}
+</code></pre>
+
+<p>Vamos a introducir dos liberías y pasaremos a ver un problema interesante.</p>
+
+<div class="topic">
+    Librería <i>math.h</i> y <i>algorithm</i>
+</div>
+<p>
+    Hemos visto hasta ahora las operaciones aritméticas básicas y hemos mencionado la potencia, pero no la hemos usado en el problema anterior, ¿Por qué? Esto es debido a que en la librería <i><b>iostream</b></i> no existe la función potencia, y una forma de calcular una potencia desde <i>iostream</i> es usando un bucle (Cosa que se verá más adelante), entonces nos vemos en la necesidad de explorar un poco más y aquí es cuándo nos encontramos con la librería <a href="https://es.wikipedia.org/wiki/Math.h">math.h</a> que nos introduce la funcion <i><b>pow(x,y)</b></i> que nos da el resultado x a la y.
+    Veamos el siguiente problema:
+    
+</p>
+<p class="citas" style="margin: 0px 15px 0px 15px;"> 
+        Queremos que el usuario nos digite tres números y ver si cumplen el teorema de pitágoras.
+</p>
+<h3><b>Código</b></h3>
+<pre class="cpp"><code>
+    *Work in progress*
+</code></pre>
+<p>
+    En el caso de la librería <a href="https://es.cppreference.com/w/cpp/algorithm">algorithm</a> nos da acceso a la funcion <i><b>min(x,y)</b></i> y <b><i>max(x,y)</i></b>,
+    que obviamente son para hallar el mínimo valor y el máximo valor entre dos elementos, respectivamente.
+</p>
+<a href="https://codeforces.com/contest/669/problem/A">Little Artem and Presents</a> <br>
+<a href="https://codeforces.com/contest/1/problem/A">Theatre Square</a>
+
+
+
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
