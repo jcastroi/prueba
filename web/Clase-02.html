@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Cristopher" />
+
+
+<title>Segunda Sesión C++</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="JS/archivo.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Workshop-Cedim-2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Clases
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+        <a href="Clase-01.html">Sesión 01</a>
+    </li>
+    <li>
+        <a href="Clase-02.html">Sesión 02</a>
+    </li>
+  </ul>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Clase 02:Repaso, Bucles y Vectores</h1>
+<h4 class="author">Loopwise </h4>
+<h4 class="date">20-03-2020</h4>
+
+</div>
+
+    <!--             Sección de problemas de repaso                          -->
+
+
+    <div class="topic">
+        Problemas para repasar
+    </div>
+    <p>
+        Vamos a tomarnos un tiempo para ver unos cuantos problemas que nos ayudarán a repasar lo que vimos en la sesión pasada. Y vamos a explicar qué es el <b>Input</b> y el <b>Output</b> que se verán en algunos problemas que veremos de aquí en adelante.
+    </p>
+    <ol>
+        <li><a href="#" onclick="cambiar('ejemplo1'); return false;">Elephant (Easy)</a>
+            <div id="ejemplo1" style="display: none; margin: 0px 15px 0px 15px;background-color:#f5eaea">
+                Un elefante decide visitar a su amigo. Decimos que la casa del elefante está en el punto 0 y la casa de su amigo está en la posición x(x&gt;0). En un paso el elefante puede moverse 1,2,3,4 o 5 posiciones. Determinar cuál es el mínimo numero de pasos que él necesita para llegar a la casa de su amigo.<br>
+                <p><a href="https://codeforces.com/problemset/problem/617/A">Link del problema original</a></p>
+                <p><a href="code/Clase-02/Elephant.cpp"><b>Código</b></a></p>
+            </div><br>
+        </li>
+        <li><a href="#" onclick="cambiar('ejemplo2'); return false;">Patrick and Shopping (Easy)</a>
+            <div id="ejemplo2" style="display: none; margin: 0px 15px 0px 15px;background-color:#f5eaea">
+                Hoy Patricio quiere ir a visitar a su amigo Bob Esponja. Para preparar su visita tiene que ir a comprar a dos tiendas que estan cerca de su casa. Hay una distancia <b>d1</b> entre su casa y la primera tienda, una distancia <b>d2</b> entre su casa y la segunda tienda, finalmente, hay una distancia <b>d3</b> entre la primera tienda y la segunda.<br>
+                <p><a href="https://codeforces.com/contest/599/problem/A">Link del problema original</a></p>
+                <p><a href="code/Clase-02/Patrick.cpp"><b>Código</b></a></p>
+            </div><br>
+        </li>
+        <li><a href="#" onclick="cambiar('ejemplo3'); return false;">The number of positions (Medium)</a>
+            <div id="ejemplo3" style="display: none; margin: 0px 15px 0px 15px;background-color:#f5eaea">
+                Petr está en una línea de <b>n</b> personas, pero él no sabe <i>su posición exacta</i>. Él puede decir que no hay menos de <b>a</b> personas frente a él, y que no hay más de <b>b</b> personas detrás de él. Tendremos que encontrar cuántas diferentes posiciones puede ocupar Petr. 
+                <p><a href="https://codeforces.com/contest/124/problem/A">Link del problema original</a></p>
+                <p><a href="code/Clase-02/Petr.cpp"><b>Código</b></a></p>
+            </div><br>
+        </li>
+        <li><a href="#" onclick="cambiar('ejemplo4'); return false;">Two Cakes (Medium)</a>
+            <div id="ejemplo4" style="display: none; margin: 0px 15px 0px 15px;background-color:#f5eaea">
+                Es víspera de Año Nuevo, por lo que Ivan decidió que ya era hora de que comenzara a poner la mesa. Ivan ha comprado dos pasteles y los ha cortado en trozos: el primer pastel se ha cortado en <b>a</b> trozos y el segundo en <b>b</b> trozos. <br>
+                Ivan sabe que habrá <b>n</b> personas en la celebración, incluyéndose a él mismo), por lo que Ivan ha puesto <b>n</b> platos para los pasteles.
+                Ahora está pensando en cómo distribuir los pasteles entre los platos. <br>
+                Ivan quiere hacerlo de tal manera que se cumplan las siguientes condiciones:
+                <ol>
+                    <li>Cada pedazo de pastel se coloca en un plato.</li>
+                    <li>Cada plato contiene al menos un pedazo de pastel.</li>
+                    <li>Ningún plato contiene piezas de ambos pasteles.</li>
+                </ol>
+                Para hacer felices a sus invitados, Ivan quiere distribuir los pasteles de tal manera que se maximice el número mínimo de piezas en el plato. Formalmente Ivan quiere saber el número máximo posible <b>x</b> para poder distribuir los pasteles de acuerdo con las condiciones antes mencionadas, y que cada plato contenga al menos <b>x</b> pedazos de pastel. <br>
+                <b><i>¡Ayuda a Ivan a calcular este número x!</i></b>
+                <p><a href="https://codeforces.com/contest/911/problem/B">Link del problema original</a></p>
+                <p><a href="code/Clase-02/Cakes.cpp"><b>Código</b></a></p>
+            </div><br>
+        </li>
+    </ol>
+
+    <!--                             Sección de Bucles                             -->
+    <div class="topic">
+        Estructuras de repetición o Bucles
+    </div>
+
+    <!-- Pequeña introducción -->
+
+    <p>
+        ¿Qué pasa si queremos que nuestro programa en C++ nos imprima números del 1 al 100? O si queremos que nos imprima 10 veces en la pantalla un <i><q>Hola mundo</q></i>, si de forma más general queremos que nos realice cierta acción un número determinado de veces.
+        En un ejemplo reciente para todos seria el problema <b><i>Elephant</i></b>, la idea era fácil de notar, osea, el problema es fácil, pero es molestoso tener que escribir tantas líneas de código que son <q>lo mismo</q> y que solamente cambia un valor. Pues vamos a ver como evitar hacer eso a mano y que la computadora lo haga por nosotros.
+        Para ello vamos a ver las <i>estructuras de repetición o bucles.</i> <br>
+        Nos pondremos como objetivo resolver los siguientes problemas en cada sección que veamos:
+        <ol>
+            <li>Imprimir un número <b><i>n</i></b> de veces un <i><q>Hola Mundo</q>(While y For)</i>.</li>
+            <li>Imprimir los números naturales del 1 al 100, primero todos, luego pares, impares y finalmente si son multiplos de algún número <i>(While y For)</i>.</li>
+            <li>Leer una cantidad <b><i>n</i></b> de datos. <i>(While y For).</i></li>
+            <li>Leer datos hasta que se ingrese cierto valor<i>(Todos) (<b>Extra:</b> Imprimir cuantos datos hemos ingresado)</i>.</li>
+        </ol>
+    </p>
+
+    <!-- Bucle While -->
+    
+    <h2><b>La estructura <i>While</i></b></h2>
+    <p class="citas" style="margin: 10px 15px 10px 15px;">Los ciclos while son estructuras de repetición, que nos permite ejecutar una o varias líneas de código de manera repetitiva sin necesidad de tener un valor inicial e incluso a veces sin siquiera conocer cuando se va a dar el valor final que esperamos, los ciclos while, no dependen directamente de valores numéricos, sino de valores booleanos, es decir su ejecución depende del valor de verdad de una condición dada, verdadera o falso, nada más. De este modo los ciclos while, son mucho más efectivos para condiciones indeterminadas, que no conocemos cuando se van a dar a diferencia de los ciclos for, con los cuales se debe tener claro un principio, un final y un tamaño de paso.</p>
+    <p>Su estructura viene a ser la siguiente:</p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+int main(){
+    /*
+        Código
+    */
+    while(/*Condición*/){
+        /*
+            Código que se ejecuta MIENTRAS condición es verdadero
+        */
+    }
+    //Más código
+    return 0;
+}
+</code></pre>
+
+<p>Se desarrollarán los problemas propuestos.</p>
+
+    <!-- Bucle Do...While -->
+    <h2><b>La estructura <i>Do...While</i></b></h2>
+    <p class="citas" style="margin: 10px 15px 10px 15px;">Los ciclos do-while son también una estructura de repetición, los cuales nos permiten ejecutar una o varias líneas de código de forma repetitiva sin necesidad de tener un valor inicial e incluso a veces sin siquiera conocer cuando se va a dar el valor final, hasta aquí son similares a los ciclos while, sin embargo el ciclo do-while nos permite añadir cierta ventaja adicional y esta consiste que nos da la posibilidad de ejecutar primero el bloque de instrucciones antes de evaluar la condición necesaria, de este modo los ciclos do-while, son más efectivos para algunas situaciones especificas. En resumen un ciclo do-while, es una estructura de control cíclica que permite ejecutar de manera repetitiva un bloque de instrucciones sin evaluar de forma inmediata una condición especifica, sino evaluándola justo después de ejecutar por primera vez el bloque de instrucciones</p>
+    <p>Su estructura viene a ser la siguiente:</p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+int main(){
+    /*
+        Código
+    */
+    do{
+        /*
+            Código que se ejecuta MIENTRAS condición es verdadero
+        */
+    }while(/*Condición*/);
+    //Más código
+    return 0;
+}
+</code></pre>
+
+<p>Se desarrollarán los problemas propuestos.</p>
+
+<!-- Bucle for -->
+
+
+<h2><b>La estructura <i>for</i></b></h2>
+<p class="citas" style="margin: 10px 15px 10px 15px;">Los ciclos for son lo que se conoce como estructuras de control de flujo cíclicas o simplemente estructuras cíclicas, estos ciclos, como su nombre lo sugiere, nos permiten ejecutar una o varias líneas de código de forma iterativa, conociendo un valor especifico inicial y otro valor final, además nos permiten determinar el tamaño del paso entre cada "giro" o iteración del ciclo.</p>
+<p>Su estructura viene a ser la siguiente:</p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+int main(){
+/*
+    Código
+*/
+for(/*declaración de nuestro iterador*/;/*Condición*/;/*Valor de cambio*/){
+    /*
+        Código que se ejecutará MIENTRAS se cumpla la condición
+    */
+}
+//Más código
+return 0;
+}
+</code></pre>
+
+
+    <!-- Sección de problemas -->
+
+<p>Se desarrollarán los problemas propuestos.</p>
+
+Se les presentan problemas para que puedan practicar, de nivel Easy & Medium, resolveremos un problema Easy en clase y dos Medium, el resto queda para ustedes.
+
+<ul>
+    <p>Problemas <i>Easy:</i></p>
+    <li><a href="https://codeforces.com/contest/1065/problem/A">Vasya and Chocolate</a></li>
+    <li><a href="https://codeforces.com/contest/1194/problem/A">Remove a Progression</a></li>
+    <li><a href="https://codeforces.com/contest/233/problem/A">Perfect Permutation</a></li>
+    <li><a href="https://codeforces.com/contest/1282/problem/A">Temporarily unavailable</a></li>
+    <li><a href="https://codeforces.com/contest/1238/problem/A">Prime Subtraction</a></li>
+    <br>
+    <p>Problemas <i>Medium:</i></p>
+    <li><a href="https://codeforces.com/contest/1141/problem/A">Game 23</a></li>
+    <li><a href="https://codeforces.com/contest/1214/problem/B">Badges</a></li>
+    <li><a href="https://codeforces.com/contest/1195/problem/B">Sport Mafia</a></li>
+    <li><a href="https://codeforces.com/contest/681/problem/B">Economy Game</a> <i>(Challenge)</i></li>
+    <br>
+</ul>
+<h6>La solución de todos los problemas así como los códigos desarrolados estarán disponibles en la página a las 5:00 pm aproximadamente. Hasta eso habrán tenido tiempo de al menos ver los problemas Uwu.</h6>
+
+    <!--             Vectores             -->
+    <div class="topic">
+        Arrays Estáticos o Vectores
+    </div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
