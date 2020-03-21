@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Cristopher" />
+
+
+<title>Tercera Sesión C++</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="JS/archivo.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Workshop-Cedim-2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Clases
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+        <a href="Clase-01.html">Sesión 01</a>
+    </li>
+    <li>
+        <a href="Clase-02.html">Sesión 02</a>
+    </li>
+    <li>
+        <a href="Clase-03.html">Sesión 03</a>
+    </li>
+  </ul>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Clase 03:Problemas de vectores, String, Funciones, Vectores Dinámicos </h1>
+<h4 class="author">Loopwise </h4>
+<h4 class="date">20-03-2020</h4>
+
+</div>
+
+<!--             Sección de problemas de vectores                         -->
+
+
+    <div class="topic">
+        Problemas de vectores
+    </div>
+
+
+    <p>
+        Vamos a tomarnos un tiempo para ver unos cuantos problemas que nos ayudarán a repasar lo que vimos en la sesión pasada. Y vamos a explicar qué es el <b>Input</b> y el <b>Output</b> que se verán en algunos problemas que veremos de aquí en adelante.
+    </p>
+    Problemas prácticos:
+    <ol>
+        
+        <li><a href="#" onclick="cambiar('ejemplo1'); return false;">Problema Práctico 01</a>
+            <div id="ejemplo1" style="display: none; margin: 0px 15px 0px 15px;background-color:#f5eaea">
+                Ingresar por teclaro un vector, posteriormente mostrar en pantalla:
+                <ol>
+                    <li>El vector</li>
+                    <li>La suma de sus elementos</li>
+                    <li>La media aritmética <i>(Flotante)</i></li>
+                </ol>
+                <p><a href="code/Clase-02/Elephant.cpp"><b>Código</b></a></p>
+            </div><br>
+        </li>
+
+        <li><a href="#" onclick="cambiar('ejemplo2'); return false;">Problema Práctico 02</a>
+            <div id="ejemplo2" style="display: none; margin: 0px 15px 0px 15px;background-color:#f5eaea">
+                Ordenar un vector de forma ascendente y de forma descendente.
+                <p><a href="code/Clase-02/Elephant.cpp"><b>Código</b></a></p>
+            </div><br>
+        </li>
+
+    </ol>
+
+    Problemas propuestos:
+
+    <ol>
+        
+       <li>
+           <a href="https://codeforces.com/contest/822/problem/A">I'm bored with life</a>
+       </li>
+
+       <li>
+           <a href="https://codeforces.com/contest/898/problem/A">Rounding</a>
+       </li>
+
+       <li>
+           <a href="https://codeforces.com/contest/1187/problem/A">Stickers and Toys</a>
+       </li>
+
+       <li>
+           <a href="https://codeforces.com/contest/1140/problem/A">Detective Book</a>
+       </li>
+
+    </ol>
+    <br>
+<!-- String o cadenas de caracteres -->
+
+    <div class="topic">
+            Strings o cadenas de caracteres
+    </div>
+
+<p class="citas">
+    Los String son objetos que representan una secuencia, cadena, arreglo o vector de caracteres, osea, representa una palabra o una oración.
+</p>
+<p>
+    Para poder usar las funciones de un string, se tiene que agregar la librería <i>&lt;string&gt;</i>. <br>
+    Veamos como podemos operar con un string:
+</p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main(){
+    //Declaración
+    string s;
+
+    //Lectura
+    getline(cin,s);//Veremos porque no cin&lt;&lt;
+
+    //Recorrido
+    // Recordemos que s es un VECTOR de caracteres, entonces: 
+    for (int i = 0; i &lt; s.size(); i++) {
+    // s[i]: accede al elemento en la posicion i
+    cout &lt;&lt; s[i] &lt;&lt; '\n';
+    }
+
+    // Imprimiendo todo el string
+    cout &lt;&lt; s &lt;&lt; '\n';
+
+    // Así podemos agregar caracter al final
+    s += 'a'; 
+    cout &lt;&lt; s &lt;&lt; '\n';
+
+    //También podemos agregar una palabra o hasta una oración
+    s +="hola"; 
+    cout &lt;&lt; s &lt;&lt; '\n';
+
+    // Chequear que hace esto
+    cout &lt;&lt; s.substr(2, 2) &lt;&lt; '\n'; 
+
+    // La comparación es igual que en otro tipo de dato
+    if (s == "hola") cout &lt;&lt; "ok" &lt;&lt; '\n';
+
+    return 0;
+
+}
+</code></pre>
+
+<p>
+    Entonces como un <i><b>string</b></i> podemos tratarlo como un <i><b>vector</b></i> y nosotros ya hemos practicado con vectores, vamos a ver un par de problemas:
+</p>
+<ol>
+    <li>
+        <a href="https://codeforces.com/contest/1097/problem/A">Gennady and a Card Game</a>
+    </li>
+    <li>
+        <a href="https://codeforces.com/contest/1111/problem/A">Superhero Transformation</a>
+    </li>
+</ol>
+
+<!-- Funciones y Recursión -->
+    <div class="topic">
+        Funciones y Recursión
+    </div>
+    <p>
+      Una función se declara de la siguiente forma  
+    </p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+
+/*Tipo de dato que nos retornará*/ /*nombre*/ (/*Parámetros*/){
+
+    /*
+        Código que realiza nuestra función
+    */
+    return /*Variable del tipo que declaramos*/;
+}
+
+//En caso de que la función no retorne nada sería del tipo void
+
+void llamar(string s){
+    cout&lt;&lt;s;
+}
+
+int main(){
+
+}   
+</code></pre>
+<p>
+    Se darán más ejemplos de uso en clase.
+</p>
+<p>
+    Cuando una función se llama a sí misma decimos que es una <i>Recursión</i>, por ejemplo, podríamos definir el <i>factorial</i>
+    como una recursión y también podríamos crear una función recursiva para <i>Fibonnacci.</i><br>
+    Veamos como sería el código de ambos:
+</p>
+<p><b>Código de Factorial:</b></p>
+<pre class="cpp"><code>#include &lt;iosteam&gt;
+using namespace std;
+
+int factorial(int n){
+    if(n==0){
+        return 1;
+    }
+    return n*factorial(n-1);
+}
+
+int main(){
+    int n; cin&gt;&gt;n;
+    cout&lt;&lt;factorial(n);
+}
+</code></pre>
+
+<p><b>Código de Fibonnacci:</b></p>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int fibonnacci(int n){
+    if( n==1 || n==2 ){
+        return 1;
+    }
+    return fibonnacci(n-1)+fibonnacci(n-2);
+}
+int main(){
+    int n; cin&gt;&gt;n;
+    cout&lt;&lt;fibonnacci(n);
+}
+</code></pre>
+
+<!-- Vectores Dinámicos -->
+
+    <div class="topic">
+        Vectores Dinámicos
+    </div>
+<pre class="cpp"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+    
+#define all(A) A.begin(),A.end()
+#define rall(A) A.rbegin(),A.rend()
+    
+void some_function(vector&lt; int &gt; v) { // Never do it unless you?re sure what you do!
+    // ?
+}
+    
+void some_function(const vector&lt; int &gt;& v) { // OK
+    // ?
+}
+    
+void modify_vector(vector&lt; int &gt;& v) { // Correct
+    v[0]++;
+}
+    
+int main(){
+    vector &lt;int&gt; arr;
+    // Agregar un elemento al final - O(1)
+    arr.push_back(123);
+    arr.push_back(987);
+    arr.push_back(343);
+    arr.push_back(134);
+    arr.push_back(345);
+    
+    // Quitar un elemento del final - O(1)
+    arr.pop_back();
+    
+    // Agregar un elemento en la posición `i` - O(n)
+    int i = 2;
+    arr.insert(begin(arr) + i, 234);
+    
+    // Eliminar un elemento de la posición `i` - O(n)
+    i = 1;
+    arr.erase(begin(arr) + i);
+    
+    // Copiar el vector
+    vector&lt; int &gt; v(10);
+    vector&lt; int &gt; v2=v;
+    vector&lt; int &gt; v3(v);
+    
+    // Para iterar el arr podemos hacerlo así:
+    for (int arr_i: arr) ;
+    
+    // O también asi
+    // arr.size() nos retorna la cantidad de elementos
+    for (int i = 0; i &lt; arr.size(); i++) ;
+    
+    // Si queremos eliminar todos los elementos
+    arr.clear();   
+        
+    int a=v.size();
+    bool m= v.empty();
+    cout&lt;&lt;"V size "&lt;&lt;a&lt;&lt;"\nV is empty? "&lt;&lt;m&lt;&lt;'\n';
+    v.push_back(1);
+    cout&lt;&lt;"V[10]= "&lt;&lt;v[10]&lt;&lt;'\n';
+    a=v.size();
+    cout&lt;&lt;"V size:"&lt;&lt;a&lt;&lt;endl;
+    vector&lt; string &gt; names(20, "Unknown"); //Vector de 20 espacios tipo cadena y con valor "Unknown"
+
+    //Podemos crear un vector de vectores, en otras palabras una Matriz
+    int N,M;
+    vector&lt; vector&lt; int &gt; &gt; Matrix(N, vector&lt; int &gt;(M, -1));
+
+    //Podemos ordenar el vector de la siguiente forma
+    vector&lt; int &gt; X;
+    int arr[]={1,20,7,9,30,4};
+    for(int i=0;i&lt;6;i++)
+        X.push_back(arr[i]);
+    sort(all(X));
+    cout&lt;&lt;" Ordenamos el vector de forma ascendente ";
+    for(int i=0;i&lt;X.size();i++)
+    cout&lt;&lt;X[i]&lt;&lt;' ';
+    
+}
+</code></pre>
+    <!-- Introducción a la Fuerza Bruta -->
+    <div class="topic">
+        Introducción a la Fuerza Bruta
+    </div>
+    <p class="citas">
+        Hay una clase de problemas donde tienes algunas ecuaciones en <b>m</b> variables. En esas ocaciones, una primera buena idea es intentar una solución fuerza bruta. Para ello se encuentra el rango de valores que puede tomar cada variable, se hace un loop for cada una de ellas, se comprueba si las ecuaciones se satisfacen y se va almacenando las m-tuplas que satisfacen las condiciones. También, cuando estamos haciendo un for sobre una variable, estamos fijando su valor, asi dentro de cada for su valor se vuelve una constante, es decir, estamos reduciendo el número de variables. Por eso, usualmente m−1 for serán suficientes, pues la última variable suele ser fácil de calcular cuando las demás ya son constantes.
+    </p>
+
+    <ul>
+        Problemas para ver mejor esta idea:
+        <li>
+            <a href="https://codeforces.com/contest/44/problem/B">Cola</a>
+        </li>
+        <li>
+            <a href="https://codeforces.com/problemset/problem/189/A">Cut Ribbon</a>
+        </li>
+    </ul>
+    <h6>
+        Se subirán problemas luego para que practiquen
+    </h6>
+</div>
+
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

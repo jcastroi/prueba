@@ -87,3 +87,9 @@ h1,h2{
   background-color:#b9cced;
   font-style: italic;
 }
+
+.solution{
+  float: right; 
+  color: #204051;
+  margin-right: 400px;
+}
